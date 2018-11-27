@@ -1,0 +1,11 @@
+Text input
+- Scrape google search given a text and download image
+
+Optimize drawing mechanics
+- Draw lines following neighboring coordinates instead of 1 px big dots
+
+Get only faces
+- Detect human faces and crop image into them
+
+Arm movements
+- Move arm to draw using ROS

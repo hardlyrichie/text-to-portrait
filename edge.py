@@ -16,8 +16,6 @@ coordinates = zip(indices[0], indices[1])
 
 # print(coordinates)
 
-# TODO: text input -> google serach api, optimize drawing mechanics, get only face
-
 print(width, height)
 
 # Create a black image of original image height and width
