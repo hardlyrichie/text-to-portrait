@@ -3,7 +3,7 @@ import cv2 as cv
 from matplotlib import pyplot as plt
 
 # READING IMAGE
-img = cv.imread('Jay-Park.jpg',0)
+img = cv.imread('images/Jay-Park.jpg',0)
 height, width = img.shape[:2]
 
 # CANNY EDGE DETECTION

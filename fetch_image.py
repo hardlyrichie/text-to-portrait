@@ -1,31 +1,46 @@
-#! python3
+! python3
 
-import bs4, sys
-from get_page import get_page
+import sys, pprint, json
+from helpers import *
 
-print('Enter Name:')
-name = input()
 
-search_url = f'https://google.com/search?q={name}&source=lnms&tbm=isch'
-search = get_page(search_url)
+# print('Enter Name:')
+# name = input()
 
-# Manually input url if google image url not available
-while not search:
-    print("Can't get search url. Enter manually (Type exit to quit):")
-    search_url = input()
+# # Fetch images from custom goolge search
+# search_url = f'https://www.googleapis.com/customsearch/v1?key=AIzaSyCdKWliVigMt35I7pLM2zqKHftpaFxdCR0&cx=016561402344353211294:au-xlsd-kvu&q={name}&searchType=image&imgSize=large&filetype=jpg'
+# search = get_page(search_url)
 
-    if search_url.lower() == 'exit':
-      sys.exit()
+# # Manually input url if google image url not available
+# while not search:
+#     print("Can't get search url. Enter manually (Type exit to quit):")
+#     search_url = input()
 
-    search = get_page(search_url)
+#     if search_url.lower() == 'exit':
+#       sys.exit()
 
-# page = open('seach.html', 'w')
-# page.write(search.text)
-# page.close()
+#     search = get_page(search_url)
 
-# Scraping for image
-soup = bs4.BeautifulSoup(search.text, 'html.parser')
+# if (search.status_code != 200):
+#   print('Error occured when attempting to fetch images')
+# else:
+#   content = json.loads(search.content)
+#   items = content['items']
+#   urls = list(map(lambda item: item['link'], items))
+#   print(urls)
 
-# print(soup)
-print(soup.find_all("div", {"class": "rg_meta"}))
-# print(f'https://google.com/{soup.select(".rg_l")[0].href}')
+with open('content.json') as content_doc:
+  content = json.load(content_doc)
+
+  # Get urls of images
+  items = content['items']
+  urls = list(map(lambda item: item['link'], items))
+  print(urls)
+
+  # Download images
+  download_img(urls, 'cows')
+
+
+
+#   with open('content.json', 'w') as content_doc:
+#     content_doc.write(json.dumps(content))
