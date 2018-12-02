@@ -1,4 +1,4 @@
-import requests, pathlib, errno, shutil, os
+import requests, errno, shutil, os
 
 def get_page(page_url):
     try:
@@ -26,12 +26,12 @@ def mkdir_p(path):
 def safe_open_wb(path):
     ''' Open "path" for writing, creating any parent directories as needed.
     '''
-    pathlib.Path(os.path.dirname(path)).mkdir(parents=True, exist_ok=True)
+    mkdir_p(os.path.dirname(path))
     return open(path, 'wb')
 
 # Download image to initially nonexistant directory
 def download_img(urls, name):
     for count, url in enumerate(urls):
         res = requests.get(url, stream=True)
-        with safe_open_wb(f'images/{name}/{name}_{count}.jpg') as img:
+        with safe_open_wb('images/' + name + '/' + name + '_' + str(count) + '.jpg') as img:
             shutil.copyfileobj(res.raw, img)
